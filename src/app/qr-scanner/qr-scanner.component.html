@@ -1,0 +1,8 @@
+<div class="qrscanner" >
+  <div class="qrframe" >  
+    <div class="placeholder" *ngIf="!isCameraOn"></div>
+    <video id="feed" [class.turned-on]="isCameraOn" #feed></video>
+    <canvas id="canvas" #canvas hidden ></canvas>
+    </div>
+  <button class="button btn-full" (click)="toggleCamera()">{{btnMessage}}</button>
+</div>
