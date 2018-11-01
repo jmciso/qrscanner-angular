@@ -40,12 +40,13 @@ export class QrScannerService {
     const mediaStream$ = this.mediaStreamingService.getMediaStream({
       video: true
     });
-    mediaStream$.pipe(
+    const args: OperatorFunction<any, any>[] = [
       tap(stream => this.videoTracks = stream.getVideoTracks()),
       ...operators,
       switchMap(_unused => this.processVideo(videoElem, canvasElem)), // maps the mediastream value to new observable stream
-      takeUntil(this.stopSubject$), // completes the observable
-    )
+      takeUntil(this.stopSubject$) // completes the observable)
+    ];
+    mediaStream$.pipe.apply(mediaStream$, args)
     .subscribe(
       null,
       null,
